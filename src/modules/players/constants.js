@@ -1,3 +1,9 @@
+export const GET_PLAYERS = 'https://football-players-b31f2.firebaseio.com/.json'
+
+// TODO: Remove this from the final version (Used for testing/prototyping)
+export const GET_USERS = 'https://jsonplaceholder.typicode.com/users'
+
+// TODO: Remove this from the final version (Used for testing/prototyping)
 export const PLAYERS = [
   {team: 'Barcelona', age: 30, position: 'Forward', name: 'Lionel Messi'},
   {team: 'Barcelona', age: 35, position: 'Defender', name: 'Javier Mascherano'},
@@ -20,6 +26,6 @@ export const VALID_POSITIONS = [
   { val: 'RB', name: 'Right-Back' }
 ]
 
-export const CATEGORIES = [
-  'Player', 'Position', 'Team', 'Age'
+export const HEADERS = [
+  'Player', 'Position', 'Nationality', 'Age'
 ]

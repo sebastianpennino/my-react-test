@@ -1,11 +1,11 @@
 const initialState = {
-  players: [],
-  filteredPlayers: [],
+  results: [],
+  filteredResults: [],
   filterByAge: '',
   filterByName: '',
   filterByPosition: '',
   error: '',
-  isLoading: false
+  isLoading: true
 }
 
 export default initialState

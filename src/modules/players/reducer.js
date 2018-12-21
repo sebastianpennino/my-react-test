@@ -1,5 +1,6 @@
 import initialState from './intialState'
-import {FETCH_DATA_LOADING, FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE, FILTER_PLAYERS, UNFILTER_PLAYERS} from './actionTypes'
+import * as actionTypes from './actionTypes'
+import { calcAge } from '../core/utilities'
 
 /**
  * Filters an array of players based on several criteria
@@ -10,43 +11,34 @@ import {FETCH_DATA_LOADING, FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE, FILTER_PLAYE
  * @returns {Array} a new array with the filtered results
  */
 const filterPlayers = (players, age, name, position) => {
-  return players.filter(player => {
-    return (age && player.age === parseInt(age, 10)) || (name && player.name.indexOf(name) !== -1) || (position && player.position === position)
+  const filtered = players.filter(player => {
+    return (age && calcAge(player.dateOfBirth) === parseInt(age, 10)) || (name && player.name.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) !== -1) || (position && player.position === position)
   })
+  return filtered.length > 0 ? filtered : players
 }
 
-const playerReducer = (state = initialState, action) => {
+export default function playerReducer (state = initialState, action) {
   switch (action.type) {
-    case FETCH_DATA_LOADING:
+    case actionTypes.FETCH_DATA_LOADING:
+      return { ...state, isLoading: true }
+    case actionTypes.FETCH_DATA_SUCCESS:
+      return { ...state, results: action.results, isLoading: false }
+    case actionTypes.FETCH_DATA_FAILURE:
+      return { ...state, error: action.error, isLoading: false }
+    case actionTypes.FILTER_PLAYERS:
       return {
         ...state,
-        isLoading: true
+        filteredResults: filterPlayers(state.results, state.filterByAge, state.filterByName, state.filterByPosition)
       }
-    case FETCH_DATA_SUCCESS:
-      return {
-        ...state,
-        players: action.payload,
-        isLoading: false
-      }
-    case FETCH_DATA_FAILURE:
-      return {
-        ...state,
-        error: action.error,
-        isLoading: false
-      }
-    case FILTER_PLAYERS:
-      return {
-        ...state,
-        filteredPlayers: filterPlayers(state.players, action.filterByAge, action.filterByName, action.filterByPosition)
-      }
-    case UNFILTER_PLAYERS:
-      return {
-        ...state,
-        filteredPlayers: state.players
-      }
+    case actionTypes.RESTORE_PLAYERS:
+      return { ...state, filteredResults: state.results }
+    case actionTypes.UPDATE_AGE:
+      return { ...state, filterByAge: action.data }
+    case actionTypes.UPDATE_NAME:
+      return { ...state, filterByName: action.data }
+    case actionTypes.UPDATE_POSITION:
+      return { ...state, filterByPosition: action.data }
     default:
       return state
   }
 }
-
-export default playerReducer

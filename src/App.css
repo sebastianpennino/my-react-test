@@ -5,7 +5,39 @@
   padding: 5px;
 }
 
-.FilteredTable {
-  border: 1px solid black;
+.App .searchBar input,
+.App .searchBar select, 
+.App .searchBar button {
+  width: 22%;
+  padding: 1px;
+  margin-right: 5px;
+}
+
+.App .filteredTable {
+  border: 1px solid #000;
   width: 100%;
+  border-collapse: collapse;
+  margin: 5px 0
+}
+.App .filteredTable th,
+.App .filteredTable td {
+  border: 1px solid #000;
+  padding: 2px;
+}
+
+.debug {
+  position: fixed;
+  right: 10px;
+  top: 5px;
+  padding: 10px;
+  max-height: 500px;
+  border: 1px solid #00AAFF;
+  overflow: auto;
+  font-size: 80%;
+  box-shadow: 6px 6px 12px grey;
+  background-color:#FFF;
+}
+
+.hide {
+  display: none !important;
 }

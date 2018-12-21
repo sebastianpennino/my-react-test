@@ -1,4 +1,7 @@
 01 - Analyze the mock, divide into conceptual components
 02 - Make a single file static version of the mock
-03 - Identify what's state and what's props and where should it be
-04 - Add some states, make things a little bit more dynamic
+03 - Identify what's state and what's props and where the state should live
+04 - Add some states, make things a little bit more dynamic, separate "smart" (container) and "dumb" (presentational) components
+05 - Split app into separated components
+06 - Add Redux, React-Redux and Redux-thunk
+07 - Make the app work with Redux
