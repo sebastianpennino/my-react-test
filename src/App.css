@@ -1,26 +1,26 @@
-.App {
+.app {
   width: 50%;
   margin: 10px auto;
   border: 1p solid black;
   padding: 5px;
 }
 
-.App .searchBar input,
-.App .searchBar select, 
-.App .searchBar button {
+.app .search-bar input,
+.app .search-bar select, 
+.app .search-bar button {
   width: 22%;
   padding: 1px;
   margin-right: 5px;
 }
 
-.App .filteredTable {
+.app .filtered-table {
   border: 1px solid #000;
   width: 100%;
   border-collapse: collapse;
   margin: 5px 0
 }
-.App .filteredTable th,
-.App .filteredTable td {
+.app .filtered-table th,
+.app .filtered-table td {
   border: 1px solid #000;
   padding: 2px;
 }

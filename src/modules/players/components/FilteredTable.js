@@ -6,7 +6,7 @@ const FilteredTable = props => {
   const results = props.results.map(el => <FilteredRow data={el} key={el.name} />)
 
   return (
-    <table className='filteredTable'>
+    <table className='filtered-table'>
       <thead>
         <tr>
           {categories}

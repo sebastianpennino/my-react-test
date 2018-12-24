@@ -66,7 +66,7 @@ class FilterableTable extends React.Component {
   render () {
     if (!this.props.isLoading) {
       return (
-        <div>
+        <div className='filterable-table'>
           <h2>Football Player Finder</h2>
           <aside className='debug'><pre><strong>props:</strong> {JSON.stringify(this.props, null, 2)}</pre></aside>
           <div>
@@ -88,7 +88,7 @@ class FilterableTable extends React.Component {
           </div>
         </div>)
     } else {
-      return (<div>Fetching data...</div>)
+      return (<div className='filterable-table'>Fetching data...</div>)
     }
   }
 }

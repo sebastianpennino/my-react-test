@@ -2,7 +2,7 @@ import React from 'react'
 import { calcAge } from '../../core/utilities'
 
 const FilteredRow = props =>
-  <tr className='filteredRow'>
+  <tr className='filtered-row'>
     <td>{props.data.name}</td>
     <td>{props.data.position}</td>
     <td>{props.data.nationality}</td>
