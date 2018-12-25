@@ -1,23 +1,12 @@
 import initialState from './intialState'
 import * as actionTypes from './actionTypes'
-import { calcAge } from '../core/utilities'
-
-/**
- * Filters an array of players based on several criteria
- * @param {Array<Players>} players the array of players to be filtered
- * @param {String} age the age of the player(s) to find
- * @param {String} name the name of the player(s) to find
- * @param {String} position the position of the player(s) to find
- * @returns {Array} a new array with the filtered results
- */
-const filterPlayers = (players, age, name, position) => {
-  const filtered = players.filter(player => {
-    return (age && calcAge(player.dateOfBirth) === parseInt(age, 10)) || (name && player.name.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) !== -1) || (position && player.position === position)
-  })
-  return filtered.length > 0 ? filtered : players
-}
+import { filterPlayers } from '../core/utilities'
 
 export default function playerReducer (state = initialState, action) {
+  if (!action || !action.type) {
+    return state
+  }
+
   switch (action.type) {
     case actionTypes.FETCH_DATA_LOADING:
       return { ...state, isLoading: true }

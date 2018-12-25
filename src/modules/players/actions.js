@@ -1,6 +1,6 @@
 /* global fetch */
 import * as actionTypes from './actionTypes'
-import { GET_PLAYERS } from './constants'
+import { GET_PLAYERS_URL } from './constants'
 
 export function fetchSuccess (data) {
   return {type: actionTypes.FETCH_DATA_SUCCESS, results: data}
@@ -38,7 +38,7 @@ export function changePositionFilter (newVal) {
 
 export function fetchPlayers () {
   return (dispatch) => {
-    fetch(GET_PLAYERS)
+    fetch(GET_PLAYERS_URL)
       .then(response =>
         response.json().then(data => ({
           data: data,

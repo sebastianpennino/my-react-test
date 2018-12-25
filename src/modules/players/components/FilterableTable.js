@@ -1,16 +1,15 @@
 import React from 'react'
 import SearchBar from './SearchBar'
 import FilteredTable from './FilteredTable'
-import {HEADERS, VALID_POSITIONS} from '../constants'
+import {VALID_POSITIONS} from '../constants'
 import * as playerActions from '../actions'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
-// These are just a placeholder for fake requests
-const fetchSomeCategories = cb => cb(HEADERS)
+// These is just a placeholder for a mock request
 const fetchSomePositions = cb => cb(VALID_POSITIONS)
 
-class FilterableTable extends React.Component {
+export class FilterableTable extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -18,7 +17,6 @@ class FilterableTable extends React.Component {
       filterPosition: '',
       filterAge: '',
       results: [],
-      categories: [],
       positions: [],
       filteredResults: [],
       counter: 0
@@ -33,7 +31,6 @@ class FilterableTable extends React.Component {
   }
 
   componentDidMount () {
-    fetchSomeCategories(categories => this.setState({ categories }))
     fetchSomePositions(positions => this.setState({ positions }))
     this.props.playerActions.fetchPlayers()
   }
@@ -68,7 +65,7 @@ class FilterableTable extends React.Component {
       return (
         <div className='filterable-table'>
           <h2>Football Player Finder</h2>
-          <aside className='debug'><pre><strong>props:</strong> {JSON.stringify(this.props, null, 2)}</pre></aside>
+          <aside className='debug hide'><pre><strong>props:</strong> {JSON.stringify(this.props, null, 2)}</pre></aside>
           <div>
             <SearchBar
               filterName={this.props.filterName}
@@ -82,7 +79,6 @@ class FilterableTable extends React.Component {
             />
             <FilteredTable
               results={this.props.filteredResults}
-              categories={this.state.categories}
             />
             <button onClick={this.resetResults}>Restore results</button>
           </div>
@@ -94,7 +90,6 @@ class FilterableTable extends React.Component {
 }
 
 function mapStateToProps (state) {
-  // TODO FIX THIS playerReducer prop here.
   const myState = state.playerReducer
   return {
     results: myState.results,

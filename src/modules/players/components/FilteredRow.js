@@ -1,14 +1,30 @@
 import React from 'react'
 import { calcAge } from '../../core/utilities'
 
-const FilteredRow = props =>
-  <tr className='filtered-row'>
-    <td>{props.data.name}</td>
-    <td>{props.data.position}</td>
-    <td>{props.data.nationality}</td>
-    <td>
-      <span title={props.data.dateOfBirth}>{calcAge(props.data.dateOfBirth)} yrs</span>
-    </td>
-  </tr>
+const FilteredRow = props => {
+  const { name, position, nationality, dateOfBirth } = props.data
+  return (
+    <tr className='filtered-row'>
+      <td>{name}</td>
+      <td>{position}</td>
+      <td>{nationality}</td>
+      <td>
+        {
+          dateOfBirth
+            ? <span className='axa' title={dateOfBirth}>{calcAge(dateOfBirth)} yrs</span>
+            : <span>n/a</span>
+        }
+      </td>
+    </tr>
+  )
+}
+
+FilteredRow.defaultProps = {
+  data: {
+    name: '',
+    position: '',
+    nationality: ''
+  }
+}
 
 export default FilteredRow
