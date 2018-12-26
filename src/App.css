@@ -1,28 +1,11 @@
-.app {
-  width: 50%;
-  margin: 10px auto;
-  border: 1p solid black;
-  padding: 5px;
+.app .main-content{
+  margin: 0 auto;
 }
-
-.app .search-bar input,
-.app .search-bar select, 
-.app .search-bar button {
-  width: 22%;
-  padding: 1px;
-  margin-right: 5px;
-}
-
 .app .filtered-table {
-  border: 1px solid #000;
   width: 100%;
-  border-collapse: collapse;
-  margin: 5px 0
 }
-.app .filtered-table th,
-.app .filtered-table td {
-  border: 1px solid #000;
-  padding: 2px;
+.app .search-bar .search-btn{
+  width: 100%;
 }
 
 .debug {

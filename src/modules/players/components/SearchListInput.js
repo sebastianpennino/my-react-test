@@ -10,10 +10,14 @@ const SearchListInput = props => {
   }
 
   return (
-    <select className='search-list-input' onChange={props.changeFn} >
-      { props.initialVal ? <option value='' defaultValue>{props.initialVal}</option> : '' }
-      { renderOptions(props.list) }
-    </select>
+    <div className='control'>
+      <div className='select'>
+        <select className='search-list-input' onChange={props.changeFn} >
+          { props.initialVal ? <option value='' defaultValue>{props.initialVal}</option> : '' }
+          { renderOptions(props.list) }
+        </select>
+      </div>
+    </div>
   )
 }
 

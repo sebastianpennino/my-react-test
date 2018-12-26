@@ -6,11 +6,19 @@ import {VALID_POSITIONS} from '../constants'
 const SearchBar = props => {
   const {filterName, onChangeFilterNameFn, positions, filterPosition, onChangeFilterPositionFn, filterAge, onChangeFilterAgeFn, onSearchFn} = props
   return (
-    <form className='search-bar'>
-      <SearchInput placeholder='Player Name' val={filterName} changeFn={onChangeFilterNameFn} />
-      <SearchListInput list={positions} initialVal='Position' val={filterPosition} changeFn={onChangeFilterPositionFn} />
-      <SearchInput placeholder='Age' val={filterAge} changeFn={onChangeFilterAgeFn} />
-      <button onClick={onSearchFn}>Search</button>
+    <form className='search-bar columns'>
+      <div className='field column'>
+        <SearchInput placeholder='Player Name' val={filterName} changeFn={onChangeFilterNameFn} />
+      </div>
+      <div className='field column'>
+        <SearchListInput list={positions} initialVal='Position' val={filterPosition} changeFn={onChangeFilterPositionFn} />
+      </div>
+      <div className='field column'>
+        <SearchInput placeholder='Age' val={filterAge} changeFn={onChangeFilterAgeFn} />
+      </div>
+      <div className='field column'>
+        <button className='search-btn button is-primary' onClick={onSearchFn}>Search</button>
+      </div>
     </form>
   )
 }

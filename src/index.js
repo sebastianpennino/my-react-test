@@ -10,7 +10,12 @@ const store = configureStore()
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <section className='section'>
+      <div className='container'>
+        <App />
+      </div>
+    </section>
+
   </Provider>,
   document.getElementById('root')
 )

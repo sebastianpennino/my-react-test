@@ -46,7 +46,9 @@ export class FilterableTable extends React.Component {
   }
 
   updateFilterName (e) {
-    const newVal = e.target.value
+    let newVal = e.target.value
+    newVal = newVal.replace(/[^A-Za-z]/ig, '')
+    e.target.value = newVal
     this.props.playerActions.changeNameFilter(newVal)
   }
 
@@ -56,7 +58,9 @@ export class FilterableTable extends React.Component {
   }
 
   updateFilterAge (e) {
-    const newVal = e.target.value
+    let newVal = e.target.value
+    newVal = newVal.replace(/[^0-9\b]/ig, '')
+    e.target.value = newVal
     this.props.playerActions.changeAgeFilter(newVal)
   }
 
@@ -64,7 +68,7 @@ export class FilterableTable extends React.Component {
     if (!this.props.isLoading) {
       return (
         <div className='filterable-table'>
-          <h2>Football Player Finder</h2>
+          <h2 className='title'>Football Player Finder</h2>
           <aside className='debug hide'><pre><strong>props:</strong> {JSON.stringify(this.props, null, 2)}</pre></aside>
           <div>
             <SearchBar
@@ -80,11 +84,17 @@ export class FilterableTable extends React.Component {
             <FilteredTable
               results={this.props.filteredResults}
             />
-            <button onClick={this.resetResults}>Restore results</button>
+            <div className='control'>
+              <button className='button' onClick={this.resetResults}>Restore results</button>
+            </div>
           </div>
         </div>)
     } else {
-      return (<div className='filterable-table'>Fetching data...</div>)
+      return (
+        <div className='filterable-table'>
+          Fetching data...
+          <progress className='progress is-small is-primary' max='100' />
+        </div>)
     }
   }
 }
