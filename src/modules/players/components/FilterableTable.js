@@ -3,6 +3,7 @@ import SearchBar from './SearchBar'
 import FilteredTable from './FilteredTable'
 import {VALID_POSITIONS} from '../constants'
 import * as playerActions from '../actions'
+import * as playerSelectors from '../selectors'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
@@ -100,14 +101,13 @@ export class FilterableTable extends React.Component {
 }
 
 function mapStateToProps (state) {
-  const myState = state.playerReducer
   return {
-    results: myState.results,
-    filteredResults: myState.filteredResults,
-    filterByAge: myState.filterByAge,
-    filterByName: myState.filterByName,
-    filterByPosition: myState.filterByPosition,
-    isLoading: myState.isLoading
+    results: playerSelectors.getResults(state),
+    filteredResults: playerSelectors.getFilteredResults(state),
+    filterByAge: playerSelectors.getFilterByAge(state),
+    filterByName: playerSelectors.getFilterByName(state),
+    filterByPosition: playerSelectors.getFilterByPosition(state),
+    isLoading: playerSelectors.getIsLoading(state)
   }
 }
 
