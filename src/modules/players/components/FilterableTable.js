@@ -1,11 +1,12 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { createStructuredSelector } from 'reselect'
 import SearchBar from './SearchBar'
 import FilteredTable from './FilteredTable'
 import {VALID_POSITIONS} from '../constants'
 import * as playerActions from '../actions'
 import * as playerSelectors from '../selectors'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
 
 // These is just a placeholder for a mock request
 const fetchSomePositions = cb => cb(VALID_POSITIONS)
@@ -19,8 +20,7 @@ export class FilterableTable extends React.Component {
       filterAge: '',
       results: [],
       positions: [],
-      filteredResults: [],
-      counter: 0
+      filteredResults: []
     }
 
     // This binding is necessary to make 'this' work in the callback
@@ -100,16 +100,14 @@ export class FilterableTable extends React.Component {
   }
 }
 
-function mapStateToProps (state) {
-  return {
-    results: playerSelectors.getResults(state),
-    filteredResults: playerSelectors.getFilteredResults(state),
-    filterByAge: playerSelectors.getFilterByAge(state),
-    filterByName: playerSelectors.getFilterByName(state),
-    filterByPosition: playerSelectors.getFilterByPosition(state),
-    isLoading: playerSelectors.getIsLoading(state)
-  }
-}
+const mapStateToPropsSelector = createStructuredSelector({
+  results: playerSelectors.getResults,
+  filteredResults: playerSelectors.getFilteredResults,
+  filterByAge: playerSelectors.getFilterByAge,
+  filterByName: playerSelectors.getFilterByName,
+  filterByPosition: playerSelectors.getFilterByPosition,
+  isLoading: playerSelectors.getIsLoading
+})
 
 function mapDispatchToProps (dispatch) {
   return {
@@ -118,6 +116,6 @@ function mapDispatchToProps (dispatch) {
 }
 
 export default connect(
-  mapStateToProps,
+  mapStateToPropsSelector,
   mapDispatchToProps
 )(FilterableTable)
