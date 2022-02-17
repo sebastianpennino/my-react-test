@@ -1,4 +1,5 @@
 /* global fetch */
+import { formatPlayersResponse, cleaPlayersResponse } from '../core/utilities'
 import * as actionTypes from './actionTypes'
 import { GET_PLAYERS_URL } from './constants'
 
@@ -40,15 +41,19 @@ export function fetchPlayers () {
   return (dispatch) => {
     fetch(GET_PLAYERS_URL)
       .then(response =>
-        response.json().then(data => ({
-          data: data,
-          status: response.status
-        }))
+        response.json().then(data => {
+          return {
+            data: data,
+            status: response.status
+          }
+        })
       )
       .then(response => {
         if (response.status === 200) {
-          // TODO: Remove this in the final version
-          if (response.data.players && response.data.players.length > 0) {
+          if (response.data.players && response.data.players) {
+            // The new data has some weird stuff in it, I should clean it up
+            response.data.players = formatPlayersResponse(response.data.players)
+            response.data.players = cleaPlayersResponse(response.data.players)
             dispatch(fetchSuccess(response.data.players))
           } else {
             dispatch(fetchSuccess(response.data))
